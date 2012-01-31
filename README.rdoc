@@ -1,5 +1,6 @@
-== Framework gem
-This gem creates views and controllers based on Bootstrap, from Twitter (http://twitter.github.com/bootstrap).
+== Bootstrap-Rails gem
+This gem replaces Rails default scaffold and create views and controllers based on Bootstrap, from Twitter (http://twitter.github.com/bootstrap).
+
 When installed, this gem overrides Rails default scaffold templates, which means that any call to scaffold generation will use the user provided templates.
 There is also a dropdown menu generator, to avoid manual menu creation.
 
@@ -9,10 +10,7 @@ After downloading project folder, run this command on root folder to make a gem 
 
 === Installation
 You can use this gem with only Rails 3. Include this line inside your Gemfile:
-  gem 'framework', '0.0.1', :path => '/path/to/gemfolder'
-
-The scaffold generator uses will_paginate gem, so include this line in your Gemfile:
-  gem 'will_paginate'
+  gem 'bootstrap-rails', :path => '/path/to/gemfolder'
 
 Run the bundle command to install required gems in your Rails application:
   bundle
