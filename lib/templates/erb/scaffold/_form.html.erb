@@ -1,0 +1,35 @@
+<%%= form_for(@<%= singular_table_name %>) do |f| %>
+  <%% if @<%= singular_table_name %>.errors.any? %>
+    <div class="alert-message block-message error">
+      <p>
+      	<strong><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</strong>
+        <ul>
+          <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
+          <li><%%= msg %></li>
+          <%% end %>
+        </ul>
+      </p>
+    </div>
+    
+    <script type="text/javascript">
+    $('document').ready(function() {    
+	  <%% @<%= singular_table_name %>.errors.each do |a| %>      
+	    $('#<%= singular_table_name %>_<%%= a %>').css('border-color', 'red');      
+	  <%% end %>
+    });
+    </script>
+  <%% end %>
+
+<% attributes.each do |attribute| -%>
+  <div class="clearfix">
+    <%%= f.label :<%= attribute.name %> %>
+    <div class="input">
+      <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+    </div>
+  </div>
+<% end -%>
+  <div class="actions">
+    <%%= f.submit <%= key_value :class, "'btn primary'" %> %>
+    <%%= link_to 'Back', <%= plural_table_name %>_path, <%= key_value :class, "'btn default'" %> %>
+  </div>
+<%% end %>

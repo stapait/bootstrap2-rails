@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Framework</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= menu_bar %>
+
+<div class="container" style="padding-top: 45px">
+  <% flash.each do |name, msg| %>        
+    <script>
+      <%= display_toast_message(msg, name) %>
+    </script>
+  <% end %>
+  <%= yield %>
+</div>
+
+</body>
+</html>

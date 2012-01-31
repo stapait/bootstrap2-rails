@@ -1,0 +1,46 @@
+<script type="text/javascript">
+	$('.btn danger').click(function(){
+		event.preventDefault();
+	});
+</script>
+
+<div class="page-header">
+  <h3>Listing <%= plural_table_name %></h3>
+</div>
+
+<%%= render(partial: '/shared/search', locals: {placeholder: 'Text to search'}) %>
+
+<table class="zebra-striped">
+  <thead>
+  	<tr>
+<% attributes.each do |attribute| -%>
+    <th class="header <%%= sort_class(@sort_direction, @sort_column, '<%= attribute.name %>') %>"><%%= sortable('<%= attribute.name %>') %></th>
+<% end -%>
+    <th width="270px"><a href="#">Actions</a></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  
+<%% if @<%= plural_table_name %>.size > 0 %>   
+  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+    <tr>
+<% attributes.each do |attribute| -%>
+      <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+<% end -%>
+      <td>
+        <%%= link_to 'Show', <%= singular_table_name %>, <%= key_value :class, "'btn info'" %> %> &nbsp;
+        <%%= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), <%= key_value :class, "'btn primary'" %> %> &nbsp;
+        <%%= link_to 'Destroy', <%= singular_table_name %>, <%= key_value :confirm, "'Are you sure?'" %>, <%= key_value :method, ":delete" %>, <%= key_value :class, "'btn danger'" %> %>
+      </td>
+    </tr>
+  <%% end %>
+<%% else %>
+    <tr><td colspan="10">No results</td></tr>  
+<%% end %>
+  </tbody>
+</table>
+
+<%%= will_paginate @<%= plural_table_name %> %>
+
+<%%= link_to 'New <%= human_name %>', new_<%= singular_table_name %>_path, <%= key_value :class, "'btn success'" %>, <%= key_value :style, "'float: right'" %> %>

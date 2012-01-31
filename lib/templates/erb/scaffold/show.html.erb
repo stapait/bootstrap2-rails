@@ -1,0 +1,21 @@
+<div class="breadcrumb">
+  <div class="page-header">
+    <h3><%= class_name %> details</h3>
+  </div>
+
+  <% attributes.each do |attribute| -%>
+  <div class="row">
+    <div class="span2">
+      <strong><%= attribute.human_name %></strong>
+    </div>
+    <div class="span10">
+  	  <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
+    </div>
+  </div>
+  <% end -%>
+</div>
+
+<div class="breadcrumb">
+  <%%= link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), :class => 'btn primary' %>
+  <%%= link_to 'Back', <%= index_helper %>_path, class: 'btn default' %>
+</div>

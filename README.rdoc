@@ -1,0 +1,35 @@
+== Framework gem
+This gem creates views and controllers based on Bootstrap, from Twitter (http://twitter.github.com/bootstrap).
+When installed, this gem overrides Rails default scaffold templates, which means that any call to scaffold generation will use the user provided templates.
+There is also a dropdown menu generator, to avoid manual menu creation.
+
+=== Building gem
+After downloading project folder, run this command on root folder to make a gem file inside pkg folder:
+  rake build
+
+=== Installation
+You can use this gem with only Rails 3. Include this line inside your Gemfile:
+  gem 'framework', '0.0.1', :path => '/path/to/gemfolder'
+
+The scaffold generator uses will_paginate gem, so include this line in your Gemfile:
+  gem 'will_paginate'
+
+Run the bundle command to install required gems in your Rails application:
+  bundle
+
+=== Templates installation
+After installing gem, run template generation with this command (it will override application_controller.rb and index.html.erb):
+  rails generate framework:templates
+
+=== Menu generator
+The menu generator creates a dropdown menu for your actions inside your controllers. There are two steps needed:
+
+1) Define wich items and subitems will be available. In a dropdown menu there is a main item and several subitems. The main item is only a text explaining the content (e.g. File, Window, Tools). The subitems are controller actions (e.g. New, Save, Close). To define the main item and corresponding subitems, insert this line in your application_controller.rb:
+  menu_options [{:title => 'Index', :itens => [
+    {:text => 'Projects', :controller => 'projects', :action => 'index'}
+  ]}]
+
+The menu_options parameter is an array of hashes with 2 keys: title and itens. The title is the text of the main item and can be anything you want. The itens is an array of hashes, wich one with 3 keys: text (the subitem text), controller (the controller with the action) and action (the action itself).
+
+2) Include a menu_bar call in your html page:
+  <%= menu_bar %>
