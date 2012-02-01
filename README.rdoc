@@ -15,27 +15,25 @@ You can use this gem with only Rails 3. Include this line inside your Gemfile:
 Run the bundle command to install required gems in your Rails application:
   bundle
 
-=== Copying files
+=== Generating view files
 After installing gem, run the views generator to copy some needed files (caution: it will override application.html.erb)
   rails generate bootstrap:views
-
-=== Loading required javascript files
-This gem uses jquery-toastmessage plugin and bootstrap dropdown menu. Include these lines in app/assets/javascripts/application.js file
-  
-  //= require jquery.toastmessage
 
 === Loading bootstrap CSS file
 Include this line in your app/assets/stylesheets/application.css file to load a required CSS file
    *= require bootstrap   
 
 === Toast messages
-Toast messages are notifications with an android-like visual. There are 4 types of toast messages: error, warning, notice and success. In order to use the toast-messages include this required javascript file in your app/assets/javascripts/application.js
+Toast messages are notifications with an android-like visual. There are 4 types of toast messages: error, warning, notice and success. In order to use the toast-messages include this required line in your app/assets/javascripts/application.js file
+  *= require jquery.toastmessage
+
+And also this line for loading CSS in your app/assets/stylesheets/application.css file
   *= require jquery.toastmessage
 
 To show a toast message use this helper method
   display_toast_message(message, type)
 
-where message is the message text and type is one of the four types of messages
+where message is the message text and type is one of the four types of messages (notice, error, success or warning)
 
 === Menu generator
 The menu generator creates a dropdown menu for your actions inside your controllers. There are three steps needed for creating a menu:

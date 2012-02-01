@@ -13,11 +13,12 @@ module BootstrapHelper
   end
   
   # display a message using the JQuery Toast Message plugin
+  # types available: notice, success, warning an error
   def display_toast_message(message, type)
-    if type == :error
-      "$().toastmessage('showErrorToast', '#{message}');".html_safe
-    else  
-      "$().toastmessage('showNoticeToast', '#{message}');".html_safe
-    end
+    return nil unless ['notice', 'success', 'warning', 'error'].include? type.to_s.downcase
+    result = "<script>"
+    result << "$().toastmessage('show#{type.to_s.capitalize}Toast', '#{message}');"
+    result << "</script>"
+    result.html_safe
   end
 end
