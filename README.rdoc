@@ -15,9 +15,19 @@ You can use this gem with only Rails 3. Include this line inside your Gemfile:
 Run the bundle command to install required gems in your Rails application:
   bundle
 
-=== Templates installation
-After installing gem, run template generation with this command (it will override application_controller.rb and index.html.erb):
+=== Copying files
+After installing gem, run files generator with this command to copy some needed files (caution: it will override some app files)
   rails generate framework:templates
+
+=== Loading required javascript files
+This gem uses jquery-toastmessage plugin and bootstrap dropdown menu. Include these lines in app/assets/javascripts/application.js file
+  //= require bootstrap-dropdown
+  //= require jquery.toastmessage
+
+=== Loading required CSS files
+Include these lines in app/assets/stylesheets/application.css file
+   *= require bootstrap
+   *= require jquery.toastmessage
 
 === Menu generator
 The menu generator creates a dropdown menu for your actions inside your controllers. There are two steps needed:
