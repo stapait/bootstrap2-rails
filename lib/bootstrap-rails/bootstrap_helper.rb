@@ -1,4 +1,4 @@
-module ApplicationHelper
+module BootstrapHelper
   # returns a link to sort table columns
   def sortable(column, title = nil)
     title ||= column.titleize

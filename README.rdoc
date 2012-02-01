@@ -16,8 +16,8 @@ Run the bundle command to install required gems in your Rails application:
   bundle
 
 === Copying files
-After installing gem, run files generator with this command to copy some needed files (caution: it will override some app files)
-  rails generate framework:templates
+After installing gem, run the views generator to copy some needed files (caution: it will override application.html.erb)
+  rails generate bootstrap:views
 
 === Loading required javascript files
 This gem uses jquery-toastmessage plugin and bootstrap dropdown menu. Include these lines in app/assets/javascripts/application.js file
