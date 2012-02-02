@@ -84,7 +84,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     @<%= orm_instance.destroy %>
 
     respond_to do |format|
-      format.html { redirect_to <%= index_helper %>_url }
+      format.html { redirect_to <%= index_helper %>_url, <%= key_value :notice, "'#{human_name} deleted.'" %> }
       format.json { head :ok }
     end
   end
