@@ -1,7 +1,7 @@
 == bootstrap-rails gem
-This gem replaces Rails default scaffold and create views and controllers based on Bootstrap, from Twitter (http://twitter.github.com/bootstrap).
+This gem replaces Rails default scaffold to create views based on Bootstrap, from Twitter (http://twitter.github.com/bootstrap).
 
-When installed, this gem overrides Rails default scaffold templates, which means that any call to scaffold generation will use the user provided templates.
+When installed, this gem overrides Rails default scaffold templates, which means that any call to scaffold generator will use the gem templates. The views also are generated with some others features like search and sort.
 There is also a dropdown menu generator to avoid manual menu creation.
 
 === Building gem

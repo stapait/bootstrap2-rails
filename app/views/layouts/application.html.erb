@@ -12,9 +12,7 @@
 
 <div class="container" style="padding-top: 45px">
   <% flash.each do |name, msg| %>        
-    <script>
-      <%= display_toast_message(msg, name) %>
-    </script>
+    <%= display_toast_message(msg, name) %>
   <% end %>
   <%= yield %>
 </div>

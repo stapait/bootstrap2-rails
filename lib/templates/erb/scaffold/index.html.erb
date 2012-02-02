@@ -1,22 +1,22 @@
 <script type="text/javascript">
-	$('.btn danger').click(function(){
+	$('.btn-danger').click(function(){
 		event.preventDefault();
 	});
 </script>
 
 <div class="page-header">
-  <h3>Listing <%= plural_table_name %></h3>
+  <h2>Listing <%= plural_table_name %></h2>
 </div>
 
 <%%= render(partial: '/shared/search', locals: {placeholder: 'Text to search'}) %>
 
-<table class="zebra-striped">
+<table class="table table-striped table-bordered table-condensed">
   <thead>
   	<tr>
 <% attributes.each do |attribute| -%>
-    <th class="header <%%= sort_class(@sort_direction, @sort_column, '<%= attribute.name %>') %>"><%%= sortable('<%= attribute.name %>') %></th>
+    <th class="<%%= sort_class(@sort_direction, @sort_column, '<%= attribute.name %>') %>"><%%= sortable('<%= attribute.name %>') %></th>
 <% end -%>
-    <th width="270px"><a href="#">Actions</a></th>
+    <th width="200px"><a href="#">Actions</a></th>
     </tr>
   </thead>
 
@@ -29,18 +29,18 @@
       <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
 <% end -%>
       <td>
-        <%%= link_to 'Show', <%= singular_table_name %>, <%= key_value :class, "'btn info'" %> %> &nbsp;
-        <%%= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), <%= key_value :class, "'btn primary'" %> %> &nbsp;
-        <%%= link_to 'Destroy', <%= singular_table_name %>, <%= key_value :confirm, "'Are you sure?'" %>, <%= key_value :method, ":delete" %>, <%= key_value :class, "'btn danger'" %> %>
+        <%%= link_to 'Show', <%= singular_table_name %>, <%= key_value :class, "'btn btn-info btn-small'" %> %> &nbsp;
+        <%%= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), <%= key_value :class, "'btn btn-primary btn-small'" %> %> &nbsp;
+        <%%= link_to 'Destroy', <%= singular_table_name %>, <%= key_value :confirm, "'Are you sure?'" %>, <%= key_value :method, ":delete" %>, <%= key_value :class, "'btn btn-danger btn-small'" %> %>
       </td>
     </tr>
   <%% end %>
 <%% else %>
-    <tr><td colspan="10">No results</td></tr>  
+    <tr><td colspan="10">Empty</td></tr>  
 <%% end %>
   </tbody>
 </table>
 
 <%%= will_paginate @<%= plural_table_name %> %>
 
-<%%= link_to 'New <%= human_name %>', new_<%= singular_table_name %>_path, <%= key_value :class, "'btn success'" %>, <%= key_value :style, "'float: right'" %> %>
+<%%= link_to 'New <%= human_name %>', new_<%= singular_table_name %>_path, <%= key_value :class, "'btn btn-large btn-success'" %>, <%= key_value :style, "'float: right'" %> %>

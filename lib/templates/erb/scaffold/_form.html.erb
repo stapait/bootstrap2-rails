@@ -1,6 +1,6 @@
-<%%= form_for(@<%= singular_table_name %>) do |f| %>
+<%%= form_for(@<%= singular_table_name %>, html: {class: 'form-horizontal'}) do |f| %>
   <%% if @<%= singular_table_name %>.errors.any? %>
-    <div class="alert-message block-message error">
+    <div class="alert alert-block">
       <p>
       	<strong><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</strong>
         <ul>
@@ -13,6 +13,14 @@
     
     <script type="text/javascript">
     $('document').ready(function() {    
+      $(".field_with_errors label").css('color', 'red');
+      
+      // Remove field_with_errors div
+      $(".field_with_errors").each(function(index, element) {
+        var content = element.innerHTML;
+        $(element).replaceWith(content);
+      });
+      
 	  <%% @<%= singular_table_name %>.errors.each do |a| %>      
 	    $('#<%= singular_table_name %>_<%%= a %>').css('border-color', 'red');      
 	  <%% end %>
@@ -21,15 +29,15 @@
   <%% end %>
 
 <% attributes.each do |attribute| -%>
-  <div class="clearfix">
-    <%%= f.label :<%= attribute.name %> %>
-    <div class="input">
+  <div class="control-group">
+    <%%= f.label :<%= attribute.name %>, class: 'control-label' %>
+    <div class="controls">
       <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
     </div>
   </div>
 <% end -%>
-  <div class="actions">
-    <%%= f.submit <%= key_value :class, "'btn primary'" %> %>
-    <%%= link_to 'Back', <%= plural_table_name %>_path, <%= key_value :class, "'btn default'" %> %>
+  <div class="form-actions">
+    <%%= f.submit <%= key_value :class, "'btn btn-primary'" %> %>
+    <%%= link_to 'Back', <%= plural_table_name %>_path, <%= key_value :class, "'btn btn-default'" %> %>
   </div>
 <%% end %>
