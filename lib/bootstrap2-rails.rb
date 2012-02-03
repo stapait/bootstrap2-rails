@@ -1,7 +1,7 @@
-require "bootstrap-rails/version"
+require "bootstrap2-rails/version"
 require "will_paginate"
-require "bootstrap-rails/bootstrap_helper"
-require "bootstrap-rails/menu_creator"
+require "bootstrap2-rails/bootstrap_helper"
+require "bootstrap2-rails/menu_creator"
 
 module BootstrapRails
   module Rails

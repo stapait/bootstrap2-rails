@@ -3,7 +3,7 @@ module Bootstrap
     class ViewsGenerator < Rails::Generators::Base
       source_root File.expand_path("../../templates", __FILE__)
 
-      desc "Creates views needed for working with bootstrap-rails"
+      desc "Creates views needed for working with bootstrap2-rails"
       
       def generate_files
         source_folder = File.join(File.dirname(File.absolute_path(__FILE__)), "..", "..", "..", "app", "views", "shared")

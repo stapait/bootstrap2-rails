@@ -1,16 +1,14 @@
-== bootstrap-rails gem
-This gem replaces Rails default scaffold to create views based on Bootstrap, from Twitter (http://twitter.github.com/bootstrap).
+== bootstrap2-rails gem
+Warning: this gem is under development, bugs are present. Works only with Rails > 3.0
+
+This gem replaces Rails default scaffold to create views based on Bootstrap 2, from Twitter (http://twitter.github.com/bootstrap). There is also a toast message feature based on JQuery Toast Message plugin.
 
 When installed, this gem overrides Rails default scaffold templates, which means that any call to scaffold generator will use the gem templates. The views also are generated with some others features like search and sort.
 There is also a dropdown menu generator to avoid manual menu creation.
 
-=== Building gem
-After downloading project folder, run this command on root folder to make a gem file inside pkg folder:
-  rake build
-
 === Installation
 You can use this gem with only Rails 3. Include this line inside your Gemfile:
-  gem 'bootstrap-rails', :path => '/path/to/gemfolder'
+  gem 'bootstrap2-rails'
 
 Run the bundle command to install required gems in your Rails application:
   bundle
@@ -19,34 +17,37 @@ Run the bundle command to install required gems in your Rails application:
 After installing gem, run the views generator to copy some needed files (caution: it will override application.html.erb)
   rails generate bootstrap:views
 
-=== Loading bootstrap CSS file
-Include this line in your app/assets/stylesheets/application.css file to load a required CSS file
-   *= require bootstrap   
+=== Loading bootstrap and JQuery Toast Message CSS files (required)
+Include these lines in your app/assets/stylesheets/application.css file to load required CSS files
+   *= require bootstrap
+   *= require jquery.toastmessage
+
+Important: Rails default scaffold.css file overrides some CSS styles. So delete scaffold.css file or clean it up to correct working of Bootstrap styles.
+
+=== Loading bootstrap and JQuery Toast Message javascript files (required)
+Include these lines in your app/assets/stylesheets/application.css file to load required CSS files
+   //= require bootstrap
+   //= require jquery.toastmessage
 
 === Toast messages
-Toast messages are notifications with an android-like visual. There are 4 types of toast messages: error, warning, notice and success. In order to use the toast-messages include this required line in your app/assets/javascripts/application.js file
-  *= require jquery.toastmessage
-
-And also this line for loading CSS in your app/assets/stylesheets/application.css file
-  *= require jquery.toastmessage
+Toast messages are notifications with an android-like visual. There are 4 types of toast messages: error, warning, notice and success.
 
 To show a toast message use this helper method
   display_toast_message(message, type)
 
-where message is the message text and type is one of the four types of messages (notice, error, success or warning)
+where message is the message text and type is one of the four types of messages (notice, error, success or warning). Usage example:
 
-=== Menu generator
-The menu generator creates a dropdown menu for your actions inside your controllers. There are three steps needed for creating a menu:
+  <%= display_toast_message('hello workd', 'notice') %>
 
-1) Load a required javascript file by adding this line to your app/assets/javascripts/application.js
-  //= require bootstrap-dropdown
+=== Menu generator (under development, not working)
+The menu generator creates a dropdown menu for your actions inside your controllers. There are two steps needed for creating a menu:
 
-2) Define wich items and subitems will be available. In a dropdown menu there is a main item and several subitems. The main item is only a text explaining the content (e.g. File, Window, Tools). The subitems are controller actions (e.g. New, Save, Close). To define the main item and corresponding subitems, insert this line in your application_controller.rb:
+1) Define wich items and subitems will be available. In a dropdown menu there is a main item and several subitems. The main item is only a text explaining the content (e.g. File, Window, Tools). The subitems are controller actions (e.g. New, Save, Close). To define the main item and corresponding subitems, insert this line in your application_controller.rb:
   menu_options [{:title => 'Index', :itens => [
     {:text => 'Projects', :controller => 'projects', :action => 'index'}
   ]}]
 
 The menu_options parameter is an array of hashes with 2 keys: title and itens. The title is the text of the main item and can be anything you want. The itens is an array of hashes, wich one with 3 keys: text (the subitem text), controller (the controller with the action) and action (the action itself).
 
-3) Include a menu_bar call in your html page:
+2) Include a menu_bar call in your html page:
   <%= menu_bar %>
