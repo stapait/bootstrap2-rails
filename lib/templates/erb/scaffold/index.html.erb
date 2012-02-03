@@ -2,6 +2,13 @@
 	$('.btn-danger').click(function(){
 		event.preventDefault();
 	});
+	
+	$('document').ready(function(){
+    $('.btn-info').tooltip({title: "Show <%= singular_table_name %>"});
+    $('.btn-primary').tooltip({title: "Edit <%= singular_table_name %>"});
+    $('.btn-danger').tooltip({title: "Delete <%= singular_table_name %>"});
+    $('.btn-success').tooltip({title: "Create a new <%= singular_table_name %>"});
+  });
 </script>
 
 <div class="page-header">
@@ -16,7 +23,7 @@
 <% attributes.each do |attribute| -%>
     <th class="<%%= sort_class(@sort_direction, @sort_column, '<%= attribute.name %>') %>"><%%= sortable('<%= attribute.name %>') %></th>
 <% end -%>
-    <th width="200px"><a href="#">Actions</a></th>
+    <th width="140px"><a href="#">Actions</a></th>
     </tr>
   </thead>
 
@@ -29,9 +36,9 @@
       <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
 <% end -%>
       <td>
-        <%%= link_to 'Show', <%= singular_table_name %>, <%= key_value :class, "'btn btn-info btn-small'" %> %> &nbsp;
-        <%%= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), <%= key_value :class, "'btn btn-primary btn-small'" %> %> &nbsp;
-        <%%= link_to 'Destroy', <%= singular_table_name %>, <%= key_value :confirm, "'Are you sure?'" %>, <%= key_value :method, ":delete" %>, <%= key_value :class, "'btn btn-danger btn-small'" %> %>
+        <%%= link_to content_tag(:i, nil, class: 'icon-list-alt icon-white'), <%= singular_table_name %>, <%= key_value :class, "'btn btn-info btn-small'" %> %> &nbsp;
+        <%%= link_to content_tag(:i, nil, class: 'icon-tag icon-white'), edit_<%= singular_table_name %>_path(<%= singular_table_name %>), <%= key_value :class, "'btn btn-primary btn-small'" %> %> &nbsp;
+        <%%= link_to content_tag(:i, nil, class: 'icon-trash icon-white'), <%= singular_table_name %>, <%= key_value :confirm, "'Are you sure?'" %>, <%= key_value :method, ":delete" %>, <%= key_value :class, "'btn btn-danger btn-small'" %> %>
       </td>
     </tr>
   <%% end %>
