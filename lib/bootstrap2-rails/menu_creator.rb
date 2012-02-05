@@ -1,39 +1,59 @@
 module MenuCreator
-  @@loaded = false
-  @@menu_params = []
+  class MenuBar
+    attr_accessor :project_name, :dropdowns
+  
+    def initialize
+      @dropdowns = []
+    end
 
-  def menu_options(params)
-    @@menu_params = params unless @@loaded
+    def add_dropdown(dropdown)
+      @dropdowns << dropdown if valid_dropdown?(dropdown)
+    end
+
+    # Check if is a valid dropdown
+    # A valid dropdown is a class with position an caption attributes and
+    # an array of subitems
+    def valid_dropdown?(dropdown)
+      return false unless dropdown.position
+      return false unless %W(left right).include? dropdown.position.to_s
+      return false unless dropdown.caption      
+      return false unless valid_subitems?(dropdown.subitems)
+      true
+    end
+
+    # Check if all subitems are valid
+    # Subitem must be a hash with keys :caption, :controller and :action or
+    # a string "---" in case of a separator
+    def valid_subitems?(subitems)
+      return false if subitems.length == 0
+      subitems.each do |subitem|
+        if subitem.class.to_s == "Hash"
+          return false unless subitem.has_key?(:caption) && subitem.has_key?(:controller) &&
+            subitem.has_key?(:action)
+        else
+          return false unless subitem.to_s == '---'
+        end
+      end
+      true
+    end
   end
 
-  def menu_bar
-    return nil unless @@menu_params
+  # Dropdown menu class
+  class MenuDropdown
+    attr_accessor :position, :caption, :subitems
 
-    html = '<div class="topbar-wrapper" style="z-index:5">'
-    html += '<div class="topbar" data-dropdown="dropdown">'
-    html += '<div class="topbar-inner">'
-    html += '<div class="container">'
-    html += '<ul class="nav">'
-    
-    @@menu_params.each do |param|
-      html += '<li class="dropdown">'
-      html += link_to(param[:title], '#', class: 'dropdown-toggle')
-      html += '<ul class="dropdown-menu">'
-
-      param[:itens].each do |subitem|
-        html += content_tag(:li, link_to(subitem[:text], controller: subitem[:controller], action: subitem[:action]))
-      end
-
-      html += '</ul>'
-      html += '</li>'
+    def initialize
+      @subitems = []
     end
-    
-    html += '</ul>'  
-    html += '</div>'
-    html += '</div>'
-    html += '</div>'
-    html += '</div>'
+  end
 
-    html.html_safe
+  # Draw menu content
+  def menu_bar
+    render partial: '/shared/menu', locals: {menu: @@menu}
+  end
+
+  # Set menu to draw
+  def set_menu(menu)
+    @@menu = menu
   end
 end
