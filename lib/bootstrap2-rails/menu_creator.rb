@@ -35,7 +35,7 @@ module MenuCreator
         end
       end
       true
-    end
+    end    
   end
 
   # Dropdown menu class
@@ -53,7 +53,7 @@ module MenuCreator
   end
 
   # Set menu to draw
-  def set_menu(menu)
+  def self.set_menu(menu)
     @@menu = menu
   end
 end

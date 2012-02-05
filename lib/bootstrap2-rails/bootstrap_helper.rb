@@ -21,4 +21,14 @@ module BootstrapHelper
     result << "</script>"
     result.html_safe
   end
+
+  # # Draw menu content
+  # def menu_bar
+  #   render partial: '/shared/menu', locals: {menu: @@menu}
+  # end
+
+  # # Set menu to draw
+  # def self.set_menu(menu)
+  #   @@menu = menu
+  # end
 end
