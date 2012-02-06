@@ -1,6 +1,7 @@
 module MenuCreator
+  @@menu = nil
   class MenuBar
-    attr_accessor :project_name, :dropdowns
+    attr_accessor :project, :dropdowns
   
     def initialize
       @dropdowns = []

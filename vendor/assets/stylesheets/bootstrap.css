@@ -565,7 +565,7 @@ input[type="image"], input[type="checkbox"], input[type="radio"] {
   line-height: normal;
   border: 0;
   cursor: pointer;
-  border-radius: 0 \0/;
+  border-radius: 0;
 }
 input[type="file"] {
   padding: initial;
@@ -2661,7 +2661,7 @@ button.btn.small, input[type="submit"].btn.small {
 .pagination li {
   display: inline;
 }
-.pagination a {
+.pagination a, .pagination em {
   float: left;
   padding: 0 14px;
   line-height: 34px;
@@ -2669,7 +2669,7 @@ button.btn.small, input[type="submit"].btn.small {
   border: 1px solid #ddd;
   border-left-width: 0;
 }
-.pagination a:hover, .pagination .active a {
+.pagination a:hover, .pagination .active a, .pagination em {
   background-color: #f5f5f5;
 }
 .pagination .active a {
@@ -2681,7 +2681,7 @@ button.btn.small, input[type="submit"].btn.small {
   background-color: transparent;
   cursor: default;
 }
-.pagination li:first-child a {
+.pagination li:first-child a, .pagination .previous_page {
   border-left-width: 1px;
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
