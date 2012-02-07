@@ -1,31 +1,31 @@
 == bootstrap2-rails gem
-Warning: this gem is under development, bugs are present. Works only with Rails > 3.0
+This gem is under development and works only with Rails > 3.0.
 
-This gem replaces Rails default scaffold to create views based on Bootstrap 2, from Twitter (http://twitter.github.com/bootstrap). There is also a toast message feature based on JQuery Toast Message plugin.
+This gem replaces Rails default scaffold to create views based on Bootstrap 2, from Twitter (http://twitter.github.com/bootstrap). There is also a toast message feature using JQuery Toast Message plugin.
 
 When installed, this gem overrides Rails default scaffold templates, which means that any call to scaffold generator will use the gem templates. The views also are generated with some others features like search and sort.
 There is also a dropdown menu generator to avoid manual menu creation.
 
 === Installation
-You can use this gem with only Rails 3. Include this line inside your Gemfile:
+Include this line inside your Gemfile:
   gem 'bootstrap2-rails'
 
 Run the bundle command to install required gems in your Rails application:
   bundle
 
 === Generating view files
-After installing gem, run the views generator to copy some needed files (caution: it will override application.html.erb)
+After installing gem, run the views generator to copy some needed files (caution: it will override application.html.erb, but this action will be prompted to user). You can also modify the generated views as you need.
   rails generate bootstrap:views
 
-=== Loading bootstrap and JQuery Toast Message CSS files (required)
+=== Loading Bootstrap and JQuery Toast Message CSS files (required)
 Include these lines in your app/assets/stylesheets/application.css file to load required CSS files
    *= require bootstrap
    *= require jquery.toastmessage
 
-Important: Rails default scaffold.css file overrides some CSS styles. So delete scaffold.css file or clean it up to correct working of Bootstrap styles.
+Important: Rails default scaffold.css file overrides some CSS styles. So delete scaffold.css file or clean it up to correct working of Bootstrap styles, otherwise you layout will be messy.
 
-=== Loading bootstrap and JQuery Toast Message javascript files (required)
-Include these lines in your app/assets/stylesheets/application.css file to load required CSS files
+=== Loading Bootstrap and JQuery Toast Message javascript files (required)
+Include these lines in your app/assets/javascripts/application.js file to load required javascript files
    //= require bootstrap
    //= require jquery.toastmessage
 
@@ -39,15 +39,41 @@ where message is the message text and type is one of the four types of messages 
 
   <%= display_toast_message('hello workd', 'notice') %>
 
-=== Menu generator (under development, not working)
-The menu generator creates a dropdown menu for your actions inside your controllers. There are two steps needed for creating a menu:
+=== Menu generator
+The menu generator creates a menu bar for your controller actions. There are two steps needed for creating a menu:
 
-1) Define wich items and subitems will be available. In a dropdown menu there is a main item and several subitems. The main item is only a text explaining the content (e.g. File, Window, Tools). The subitems are controller actions (e.g. New, Save, Close). To define the main item and corresponding subitems, insert this line in your application_controller.rb:
-  menu_options [{:title => 'Index', :itens => [
-    {:text => 'Projects', :controller => 'projects', :action => 'index'}
-  ]}]
+1) Define which items and subitems will be available. In a dropdown menu there is a main item and several subitems. You can also put a separator between subitems. The main item is only a text explaining the content (e.g. File, Window, Tools). The subitems are controller actions (e.g. New, Save, Close). To define the main item and corresponding subitems you need to use MenuBar and MenuDropdown classes. For example:
+  
+  # Creates a MenuBar instance
+  menu = MenuCreator::MenuBar.new
+  
+  # Define project name that will be displayed on left side
+  menu.project = {caption: "Project name", controller: "index", action: "index"}
 
-The menu_options parameter is an array of hashes with 2 keys: title and itens. The title is the text of the main item and can be anything you want. The itens is an array of hashes, wich one with 3 keys: text (the subitem text), controller (the controller with the action) and action (the action itself).
+  # Create a dropdown menu with 3 subitems and one separator on left side
+  dropdown1 = MenuCreator::MenuDropdown.new
+  dropdown1.position = :left
+  dropdown1.caption = "Dropdown 1"
+  dropdown1.subitems << {caption: "subitem 1", controller: "index", action: "index"}
+  dropdown1.subitems << {caption: "subitem 2", controller: "index", action: "index"}
+  dropdown1.subitems << "---"
+  dropdown1.subitems << {caption: "subitem 3", controller: "index", action: "index"}
+  menu.add_dropdown dropdown1
+
+  # Create a dropdown menu with 3 subitems and one separator on right side
+  dropdown2 = MenuCreator::MenuDropdown.new
+  dropdown2.position = :right
+  dropdown2.caption = "Dropdown 2"
+  dropdown2.subitems << {caption: "subitem 1", controller: "index", action: "index"}
+  dropdown2.subitems << {caption: "subitem 2", controller: "index", action: "index"}
+  dropdown2.subitems << "---"
+  dropdown2.subitems << {caption: "subitem 3", controller: "index", action: "index"}
+  menu.add_dropdown dropdown2
+
+  # Set menu to MenuCreator
+  MenuCreator.set_menu menu
+
+Note that you have to define the caption, the controller and the action to each subitem otherwise the menu will not work. Each subitem will be turned to a link.
 
 2) Include a menu_bar call in your html page:
   <%= menu_bar %>

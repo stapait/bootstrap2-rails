@@ -1,10 +1,10 @@
 <% if menu %>
-  <div class="navbar navbar-static">
+  <div class="navbar navbar-static" style="margin: -2px">
     <div class="navbar-inner">
       <div class="container" style="width: auto;">
 
         <% if menu.project %>
-          <%= link_to(menu.project[:name], {controller: menu.project[:controller], action: menu.project[:action]}, class: "brand") %>
+          <%= link_to(menu.project[:caption], {controller: menu.project[:controller], action: menu.project[:action]}, class: "brand") %>
         <% end %>
 
         <% menu.dropdowns.each do |dropdown| %>
