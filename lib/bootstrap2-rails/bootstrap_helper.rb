@@ -6,10 +6,10 @@ module BootstrapHelper
     link_to title, sort: column, direction: direction
   end
   
-  def sort_class(direction, column, table_column)
+  def sort_icon(direction, column, table_column)
     return nil if column != table_column    
-    return 'yellow headerSortDown' if direction == 'asc'
-    return 'yellow headerSortUp' if direction == 'desc'
+    return content_tag(:i, nil, {class: 'icon-chevron-up', style: 'float: right'}) if direction == 'asc'
+    return content_tag(:i, nil, {class: 'icon-chevron-down', style: 'float: right'}) if direction == 'desc'
   end
   
   # display a message using the JQuery Toast Message plugin

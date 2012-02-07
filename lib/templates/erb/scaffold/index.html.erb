@@ -21,7 +21,7 @@
   <thead>
   	<tr>
 <% attributes.each do |attribute| -%>
-    <th class="<%%= sort_class(@sort_direction, @sort_column, '<%= attribute.name %>') %>"><%%= sortable('<%= attribute.name %>') %></th>
+    <th><%%= sortable('<%= attribute.name %>') + sort_icon(@sort_direction, @sort_column, '<%= attribute.name %>') %></th>
 <% end -%>
     <th width="140px"><a href="#">Actions</a></th>
     </tr>
