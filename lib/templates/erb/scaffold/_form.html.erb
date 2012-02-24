@@ -1,14 +1,14 @@
 <%%= form_for(@<%= singular_table_name %>, html: {class: 'form-horizontal'}) do |f| %>
   <%% if @<%= singular_table_name %>.errors.any? %>
-    <div class="alert alert-block">
+    <div class="alert alert-error">
       <p>
       	<strong><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</strong>
-        <ul>
-          <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
-          <li><%%= msg %></li>
-          <%% end %>
-        </ul>
-      </p>
+      </p>      
+      <ul>
+        <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
+        <li style="display: block"><%%= msg %></li>
+        <%% end %>
+      </ul>          
     </div>
     
     <script type="text/javascript">
