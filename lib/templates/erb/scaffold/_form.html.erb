@@ -1,33 +1,6 @@
 <%%= form_for(@<%= singular_table_name %>, html: {class: 'form-horizontal'}) do |f| %>
-  <%% if @<%= singular_table_name %>.errors.any? %>
-    <div class="alert alert-error">
-      <p>
-      	<strong><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</strong>
-      </p>      
-      <ul>
-        <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
-        <li style="display: block"><%%= msg %></li>
-        <%% end %>
-      </ul>          
-    </div>
-    
-    <script type="text/javascript">
-    $('document').ready(function() {    
-      $(".field_with_errors label").css('color', 'red');
-      
-      // Remove field_with_errors div
-      $(".field_with_errors").each(function(index, element) {
-        var content = element.innerHTML;
-        $(element).replaceWith(content);
-      });
-      
-	  <%% @<%= singular_table_name %>.errors.each do |a| %>      
-	    $('#<%= singular_table_name %>_<%%= a %>').css('border-color', 'red');      
-	  <%% end %>
-    });
-    </script>
-  <%% end %>
-
+  <%%= render(partial: 'shared/errors', locals: {model: @<%= singular_table_name %>}) %>
+  
 <% attributes.each do |attribute| -%>
   <div class="control-group">
     <%%= f.label :<%= attribute.name %>, class: 'control-label' %>

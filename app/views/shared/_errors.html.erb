@@ -1,0 +1,28 @@
+<% if model.errors.any? %>
+  <div class="alert alert-block">
+    <p>
+      <strong><%= pluralize(model.errors.count, "error") %> prohibited this <%= model.class.to_s.downcase %> from being saved:</strong>
+      <ul>
+        <% model.errors.full_messages.each do |msg| %>
+        <li style="display: block"><%= msg %></li>
+        <% end %>
+      </ul>
+    </p>
+  </div>
+  
+  <script type="text/javascript">
+    $('document').ready(function() {    
+      $(".field_with_errors label").css('color', 'red');
+      
+      // Remove field_with_errors div
+      $(".field_with_errors").each(function(index, element) {
+        var content = element.innerHTML;
+        $(element).replaceWith(content);
+      });
+      
+      <% model.errors.each do |a| %>      
+        $('#<%= model.class.to_s.downcase %>_<%= a %>').css('border-color', 'red');      
+      <% end %>
+    });
+  </script>
+<% end %>
