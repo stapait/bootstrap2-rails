@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   # s.add_development_dependency "rspec"
   # s.add_runtime_dependency "rest-client"
   s.add_dependency "will_paginate"
+  s.add_dependency "thor"
 end

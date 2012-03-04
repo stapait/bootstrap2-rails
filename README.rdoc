@@ -1,5 +1,5 @@
 == bootstrap2-rails gem
-This gem is under development and works only with Rails > 3.0.
+This gem works only with Rails > 3.0.
 
 This gem replaces Rails default scaffold to create views based on Bootstrap 2, from Twitter (http://twitter.github.com/bootstrap). There is also a toast message feature using JQuery Toast Message plugin.
 
@@ -13,21 +13,11 @@ Include this line inside your Gemfile:
 Run the bundle command to install required gems in your Rails application:
   bundle
 
-=== Generating view files
-After installing gem, run the views generator to copy some needed files (caution: it will override application.html.erb, but this action will be prompted to user). You can also modify the generated views as you need.
-  rails generate bootstrap:views
+=== Updating files
+After installing gem, run the install generator to update some needed files (caution: it will update application.html.erb)
+  rails generate bootstrap:install
 
-=== Loading Bootstrap and JQuery Toast Message CSS files (required)
-Include these lines in your app/assets/stylesheets/application.css file to load required CSS files
-   *= require bootstrap
-   *= require jquery.toastmessage
-
-Important: Rails default scaffold.css file overrides some CSS styles. So delete scaffold.css file or clean it up to correct working of Bootstrap styles, otherwise you layout will be messy.
-
-=== Loading Bootstrap and JQuery Toast Message javascript files (required)
-Include these lines in your app/assets/javascripts/application.js file to load required javascript files
-   //= require bootstrap
-   //= require jquery.toastmessage
+Important: Rails default scaffold.css file overrides some CSS styles. So delete scaffold.css file or clean it up to correct working of Bootstrap stylesheets, otherwise you layout will be messy.
 
 === Toast messages
 Toast messages are notifications with an android-like visual. There are 4 types of toast messages: error, warning, notice and success.
